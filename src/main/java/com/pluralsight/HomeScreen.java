@@ -5,7 +5,8 @@ import java.io.*;
 
 //Create a main class of strings[] args
 public class HomeScreen {
-    public void HomeScreen() {
+
+    public HomeScreen() {
         //Here we define deposit
         //create csv file        File Blankcsv = new File("Ledger.csv");
         Scanner Read = new Scanner(System.in);
