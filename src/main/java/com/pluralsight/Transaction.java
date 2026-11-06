@@ -1,18 +1,18 @@
 package com.pluralsight;
 import java.time.format.DateTimeFormatter;
 import java.util.*; //for the concatenation stuff
-import java.util.Scanner;
 import java.io.*;
 import java.time.LocalTime;
 import java.time.LocalDate;
 public class Transaction {
-    LocalTime Date, Time;
-    String Description, Vendor;
+    LocalTime Time;
+    LocalDate Date;
+    private String Description, Vendor;
     //try privitizing the double too just to see what happens
-    public double Amount;
+    private double Amount;
 
     //making constructor; will make sense of above code retroactively
-    Transaction(LocalTime Date, LocalTime Time, String Description, String Vendor, double Amount) {
+    Transaction(LocalDate Date, LocalTime Time, String Description, String Vendor, double Amount) {
         this.Date = Date;
         this.Time = Time;
         this.Description = Description;
@@ -32,7 +32,7 @@ public class Transaction {
     public LocalTime getTime() {
         return this.Time;
     }
-    public LocalTime getDate() {
+    public LocalDate getDate() {
         return this.Date;
     }
     //Now we need a csv string method. Why? Because: using string methods and the datetimeformat failed big time!
@@ -46,7 +46,7 @@ public class Transaction {
     //A bit suprised it got upset wgen we tried to make the constructor "Date.."
     //oh right, because Date is a LocalTime. But Since .now() is static, we gotta create anotha var..
     LocalTime Current_Time = LocalTime.now();
-    DateTimeFormatter time = DateTimeFormatter.ofPattern("HH:MM:SS");
+    DateTimeFormatter time = DateTimeFormatter.ofPattern("HH:mm:ss");
 
 
     public String csv_string() {
@@ -58,14 +58,14 @@ public class Transaction {
         //2.Combine the five attributes. I guess we'd first have to start with the latter three
         //We can use string methods, this time acting uon F_Date, F_Time and the rest
         //Concatenate? Yes, see below. We use StringBuilder (courtesy of GeeksforGeeks)
-        StringBuilder c = new StringBuilder();
-        c.append(F_Date);
-        c.append(F_Time);
-        c.append(getDescription());
-        c.append(getVendor());
-        c.append(getAmount());
-        String Final = c.toString();
-        return Final;
+        //We also want to preserve the formatting. Were we to just envelop the double with quotation marks, it wouldn't b ecannonical
+        //so, use String.valueOf(); it faciliates type conversion in the way we desire
+        String c = String.join("|", F_Date, F_Time, getDescription(), getVendor(), String.valueOf(getAmount()));
+
+        String finalString = c;
+        //All well and good, but we must also insert a pipe between each field.
+        //we could use the insert(int, String) method
+        return finalString;
 
         }
 
