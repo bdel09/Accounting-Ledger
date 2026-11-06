@@ -70,6 +70,22 @@ public class Transaction {
 
         }
     public loadTransactions() {
+        history = ArrayList<Transaction>
+        try {
+        BufferedReader BR = new BufferedReader(FileReader(“transactions.csv”));
+        while (line = readLine() != null {
+            try {
+            history.add(csv_line(line));
+}
+            catch (Exception e) {
+}
+        
+       //The tougher part: appending the transaction into history
+       //or is it? some array ootions: history.add(line);
+
+}
+
+}
 }
 
 
