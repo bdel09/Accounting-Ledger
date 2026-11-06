@@ -85,9 +85,9 @@ public class Transaction {
         return new Transaction(date, time, description, Vendor, Amount);
 
     }
-    public String logTransactions() {
+    public void logTransactions() {
         ArrayList<String> History =  new ArrayList<String>();
-
+//adding data
         try (BufferedReader BR = new BufferedReader(new FileReader("transactions.csv"))){
             String line = BR.readLine();
             while ((line) != null) {
@@ -106,6 +106,7 @@ public class Transaction {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+        System.out.print("Your History thus Far:" + History);
     }
 
 
