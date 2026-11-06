@@ -40,9 +40,10 @@ public class Transaction {
     //since we using just one DateTimeFormatter went horribly, let's split:
     //What's the date? well, not fully sure why, but I think we can't use that "new" flag just because this is our very first time even
     //itroducing the LocalDate and its as a constructor(?)
-    LocalDate dateFormatter = LocalDate.now();
+
     //Format
-    DateTimeFormatter date = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    //Just learned: the automatic formaf is YYYY/DD/MM and so the DMF is redundant
+    String DF = date.tostring(Date);
     //A bit suprised it got upset wgen we tried to make the constructor "Date.."
     //oh right, because Date is a LocalTime. But Since .now() is static, we gotta create anotha var..
     LocalTime Current_Time = LocalTime.now();
@@ -53,8 +54,8 @@ public class Transaction {
 
         //0. Take note of the pattern:date|time|description|vendor|amount
         //1. Format our time and date
-        String F_Date = date.format(dateFormatter);
-        String F_Time = time.format(Current_Time);
+        String F_Date = date.format(this.Date);
+        String F_Time = time.format(this.Time);
         //2.Combine the five attributes. I guess we'd first have to start with the latter three
         //We can use string methods, this time acting uon F_Date, F_Time and the rest
         //Concatenate? Yes, see below. We use StringBuilder (courtesy of GeeksforGeeks)
@@ -68,6 +69,8 @@ public class Transaction {
         return finalString;
 
         }
+    public loadTransactions() {
+}
 
 
     }
